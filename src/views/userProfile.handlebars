@@ -1,0 +1,17 @@
+<h1>¡Bienvenido {{user.first_name}}!</h1>
+<h2>Datos de tu perfil</h2>
+
+<section id="perfil">
+    <div>
+        <ul>
+            <li>Nombre completo: {{user.first_name}} {{user.last_name}}</li>
+            <li>ID:{{user._id}}</li>
+            <li>{{user.email}}</li>
+            <li>Edad:{{user.age}}</li>
+        </ul>
+    </div>
+
+    <a href="/api/products">
+        <h3>Volver al listado de productos</h3>
+    </a>
+</section>

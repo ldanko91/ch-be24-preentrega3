@@ -1,0 +1,28 @@
+<h1>Listado de carritos</h1>
+<section id="carritos">
+    <div>
+        {{#each carritos}}
+        <div>
+            <a href="/api/carts/{{_id}}">
+                <h2>Carrito {{_id}}</h2>
+            </a>
+            {{#each this.products}}
+            <ul>
+                <li>Cantidad: {{this.quantity}}</li>
+                <li>{{this.products.title}}</li>
+                <li>ID:{{this.id}}</li>
+            </ul>
+            <button onclick="delFromCart('{{this.id}}')">Eliminar del carrito</button>
+            {{/each}}
+        </div>
+        {{/each}}
+        {{#if hasPrevPage}}
+        <a href="./products/{{prevPage}}"><button>Anterior</button></a>
+        {{/if}}
+
+        {{#if hasNextPage}}
+        <a href="products/?page={{nextPage}}"><button>Siguiente</button></a>
+        {{/if}}
+    </div>
+</section>
+<script src="/js/carts.js"></script>

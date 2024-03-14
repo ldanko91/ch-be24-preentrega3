@@ -1,0 +1,54 @@
+<h1>Lista de productos</h1>
+<section id="selectProdCats">
+    <div>
+        <h3>Filtros por categorías populares</h3>
+        <ul>
+            <a href='/api/products/?filterBy=category:"tanques"'>
+                <li>Tanques</li>
+            </a>
+            <a href='/api/products/?filterBy=category:"vanitorys"'>
+                <li>Vanitorys</li>
+            </a>
+            <a href='/api/products/?filterBy=category:"termofusion"'>
+                <li>Termofusión</li>
+            </a>
+        </ul>
+
+        <h3>Otros filtros</h3>
+        <ul>
+            <a href='/api/products/?filterBy=status:true'>
+                <li>Productos disponibles</li>
+            </a>
+            <a href='/api/products/?filterBy=status:false'>
+                <li>Productos no disponibles</li>
+            </a>
+        </ul>
+    </div>
+</section>
+
+<section id="productos">
+    <div>
+
+        {{#each productos}}
+        <div>
+            <a href="/api/products/{{code}}">
+                <h2>{{title}}</h2>
+            </a>
+            <h3>${{price}}</h3>
+            <ul>
+                <li>ID:{{_id}}</li>
+                <li>Categoría:{{category}}</li>
+            </ul>
+            <button onclick="addToCart('{{_id}}')">Agregar al carrito!</button>
+        </div>
+        {{/each}}
+        {{#if hasPrevPage}}
+        <a href="?page={{prevPage}}"><button>Anterior</button></a>
+        {{/if}}
+        <p>Página {{page}} de {{totalPages}}</p>
+        {{#if hasNextPage}}
+        <a href="?page={{nextPage}}"><button>Siguiente</button></a>
+        {{/if}}
+    </div>
+</section>
+<script src="/js/product.js"></script>

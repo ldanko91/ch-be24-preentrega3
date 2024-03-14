@@ -1,0 +1,22 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1{
+    color: crimson;
+}
+
+h2{
+    color: lightcoral;
+}
+
+h3{
+    color: gray;
+}
+
+li{
+    color:brown;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

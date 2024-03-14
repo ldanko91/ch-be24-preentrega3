@@ -1,0 +1,22 @@
+<h1>Bienvenido Coder Admin!</h1>
+<h2>Listado de usuarios</h2>
+
+<section id="usuarios">
+    <div>
+
+        {{#each users}}
+        <div>
+            <h3>{{first_name}} {{last_name}}</h3>
+            <ul>
+                <li>ID:{{_id}}</li>
+                <li>{{email}}</li>
+                <li>Edad:{{age}}</li>
+                <li>Rol:{{role}}</li>
+            </ul>
+        </div>
+        {{/each}}
+    </div>
+    <a href="/api/products">
+        <h3>Volver al listado general</h3>
+    </a>
+</section>

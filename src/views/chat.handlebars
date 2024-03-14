@@ -1,0 +1,30 @@
+<h1>Estamos para ayudarte!</h1>
+<h3>Chateá online con un asesor</h3>
+
+<section id="chatBox">
+  <form id="chatForm">
+    <label for="userMail">E-Mail:</label>
+    <input type="mail" id="userMail" name="userMail" required><br><br>
+
+    <label for="message">Descripción:</label>
+    <input type="text" id="message" name="message" required><br><br>
+
+    <input type="submit" value="Enviar" id="sendMessage">
+  </form>
+</section>
+
+<section id="oldMessages">
+  <ul id="oldMessagesDiv">
+    <div>
+      {{#each messages}}
+      <li>{{this.user}} dice... {{this.message}}</li>
+
+
+      {{/each}}
+
+
+    </div>
+  </ul>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/rtChat.js"></script>
+</section>

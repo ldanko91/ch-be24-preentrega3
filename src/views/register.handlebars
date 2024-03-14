@@ -1,0 +1,27 @@
+<h1>Registrate en nuestro sitio</h1>
+
+<form action="login" id="registerForm">
+    <label for="firstName">Nombre</label>
+    <input type="text" id="firstName" name="first_name">
+    
+    <label for="lastName">Apellido</label>
+    <input type="text" id="lastName" name="last_name">
+    
+    <label for="userMail">Email</label>
+    <input type="email" id="userMail" name="email">
+    
+    <label for="userAge">Edad</label>
+    <input type="number" id="userAge" name="age">
+    
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" name="password">
+    
+    <input type="submit" value="Enviar" id="sendLogin">
+</form>
+
+<h3>¿Ya tienes un usuario?</h3>
+<a href="/api/sessions/login">
+    <h3>Accede a tu usuario aquí</h3>
+</a>
+
+<script src="/js/register.js"></script>

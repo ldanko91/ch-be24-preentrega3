@@ -1,0 +1,28 @@
+<h1>Detalle del producto</h1>
+
+<section id="productos">
+    <div>
+
+        {{#each productos}}
+        <div>
+            <a href="/api/products/{{code}}">
+                <h2>{{title}}</h2>
+            </a>
+            <h3>${{price}}</h3>
+            <ul>
+                <li>ID:{{_id}}</li>
+                <li>{{description}}</li>
+                <li>Categoría:{{category}}</li>
+                <li>Código:{{code}}</li>
+                <li>Stock:{{stock}}</li>
+            </ul>
+            <button onclick="addToCart('{{_id}}')">Agregar al carrito!</button>
+        </div>
+        {{/each}}
+
+    </div>
+    <a href="/api/products">
+        <h3>Volver al listado general</h3>
+    </a>
+</section>
+<script src="/js/product.js"></script>
