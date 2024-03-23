@@ -1,14 +1,15 @@
 console.log("se activo el productos.js")
 const btnAdd = Object(document.getElementById('addBtn'))
 
-const addToCart = async (productId) => {
-    console.log(productId);
-    await fetch(`/api/carts/65bac62505eef1138a2708f5/products/${productId}`, {
+const addToCart = async (productId, cartCode) => {
+    console.log('prod' + productId)
+    console.log('cart' + cartCode)
+    await fetch(`/api/carts/${cartCode}/products/${productId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ productId }),
+        body: '',
     })
         .then(response => response.json())
         .then(data => {

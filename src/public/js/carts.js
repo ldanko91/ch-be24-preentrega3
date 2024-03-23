@@ -1,17 +1,30 @@
 console.log("se activo el carts.js")
-const btnDel = Object(document.getElementById('delBtn'))
+const goPurchase = async (cCod) => {
 
-
-const delFromCart = async (productId) => {
-    const cartId = req.params.cId
-    console.log(cartId)
-    console.log(productId);
-    await fetch(`/api/carts/${cartId}/api/${productId}`, {
-        method: 'DEL',
+    await fetch(`/api/carts/${cCod}/purchase`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cartId }),
+        body: '',
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error al vaciar carrito:', error);
+        });
+}
+
+
+const delFromCart = async (productId, cartCode) => {
+    await fetch(`/api/carts/${cartCode}/product/${productId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cartCode, productId }),
     })
         .then(response => response.json())
         .then(data => {
@@ -22,5 +35,20 @@ const delFromCart = async (productId) => {
         });
 }
 
+const emptyCart = async (cId) => {
 
-// btnAdd.addEventListener('click', console.log("boton cliqueado"))
+    await fetch(`/api/carts/${cId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: '',
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error al vaciar carrito:', error);
+        });
+}

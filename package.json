@@ -5,7 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "ENVIRONMENT=dev nodemon src/index.js",
+    "start:prod": "ENVIRONMENT=prod nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +28,8 @@
     "passport-github2": "^0.1.12",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "socket.io": "^4.7.0"
+    "socket.io": "^4.7.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/node": "^20.11.16"

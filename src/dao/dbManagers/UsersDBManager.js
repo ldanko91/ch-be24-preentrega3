@@ -1,4 +1,5 @@
 import usersModel from "../../models/users.js";
+import cartsModel from "../../models/carts.js";
 
 export default class UsersDBManager {
     constructor() {
@@ -27,7 +28,7 @@ export default class UsersDBManager {
 
     getUserById = async (id) => {
         try {
-            let users = await usersModel.findById(id, { __v: 0 }).lean();
+            let users = await usersModel.findById(id).populate({ path: 'cart._id', model: cartsModel });
             return users
         } catch (error) {
             console.log(error)
@@ -36,11 +37,19 @@ export default class UsersDBManager {
     }
     getUserByEmail = async (mail) => {
         try {
-            let users = await usersModel.findOne(mail, { __v: 0 }).lean();
+            let users = await usersModel.findOne(mail, { __v: 0 }).lean().populate({ path: 'cart._id', model: cartsModel });
             return users
         } catch (error) {
             console.log(error)
         }
 
+    }
+    updateCart = async (uId, cId) => {
+        let user = await usersModel.findById(uId)
+        let cart = await cartsModel.findOne({ _id: cId }).lean();
+        let currentCart = user.cart
+        currentCart.push(cart)
+        let upload = await usersModel.updateOne({ _id: uId }, { cart: currentCart });
+        return upload
     }
 }

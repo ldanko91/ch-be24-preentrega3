@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { uuid } from "uuidv4";
 
 const cartsCollection = 'cart'
 
@@ -24,6 +25,11 @@ const cartsSchema = new mongoose.Schema({
             },
         ],
         default:[],
+        required: true
+    },
+    code: {
+        type: String,
+        default: uuid(),
         required: true
     },
 })

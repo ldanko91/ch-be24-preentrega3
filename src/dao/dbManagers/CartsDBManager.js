@@ -1,6 +1,5 @@
 import cartsModel from "../../models/carts.js";
 import productsModel from "../../models/products.js";
-import { ObjectId } from "mongoose";
 
 export default class CartsDBManager {
     constructor(){
@@ -23,8 +22,7 @@ export default class CartsDBManager {
 
     getCartById = async (getCode) => {
         try {
-            let carrito = await cartsModel.findOne({ _id: getCode }).lean().populate({ path: 'products.id', model: productsModel });
-            // console.log(carrito)
+            let carrito = await cartsModel.findOne({ code: getCode }).lean().populate({ path: 'products.id', model: productsModel });
             return carrito
         } catch (error) {
             console.log(error)
@@ -33,11 +31,27 @@ export default class CartsDBManager {
 
     addToCartById = async (cId, pId) => {
         try {
-            let carrito = await cartsModel.findOne({ _id: cId });
-            let prodsInCart = carrito.products;
-            const newProd = { id: { _id: pId }, quantity: 1 }
-            prodsInCart.push(newProd);
-            let upload = await cartsModel.updateOne({ _id: cId }, { products: prodsInCart });
+            let product = await productsModel.findById(pId)
+            let prodCod = product.code
+            let carrito = await cartsModel.findOne({ code: cId }).populate({ path: 'products.id', model: productsModel });
+            let prodsInCart = carrito.products
+            function getIndexByCode(prodsInCart, codeToSearch) {
+                for (let i = 0; i < prodsInCart.length; i++) {
+                    if (prodsInCart[i].id.code === codeToSearch) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+            const codeToSearch = prodCod;
+            const index = getIndexByCode(prodsInCart, codeToSearch);
+            if (index > -1) {
+                prodsInCart[index].quantity += 1;
+            } else {
+                const newProd = { id: pId, quantity: 1 };
+                prodsInCart.push(newProd);
+            }
+            let upload = await cartsModel.updateOne({ code: cId }, { products: prodsInCart });
             return upload
         } catch (error) {
             console.log(error)
@@ -45,14 +59,16 @@ export default class CartsDBManager {
     }
 
     deleteProductById  = async(cartId,prodId)=>{
-        let carrito = await cartsModel.findOne({_id:cartId}).lean();
+        let carrito = await cartsModel.findOne({ code: cartId }).lean();
         let prodsInCart = carrito.products;
+        // console.log(prodsInCart)
         let delIndex = prodsInCart.findIndex(producto => producto.id == prodId)
+        console.log(delIndex)
         prodsInCart.splice(delIndex,1)
         let updateObject = {
             $set: { products: prodsInCart }
         };
-        let upload = await cartsModel.updateOne({ _id: cartId }, updateObject);
+        let upload = await cartsModel.updateOne({ code: cartId }, updateObject);
         return upload
     }
 
@@ -75,8 +91,7 @@ export default class CartsDBManager {
     }
 
     emptyCart = async(cId)=>{
-        let carrito = await cartsModel.findOne({_id:cId}).lean();
-        let upload = await cartsModel.updateOne({ _id: cId }, { products: [] });
+        let upload = await cartsModel.updateOne({ code: cId }, { products: [] });
         return upload
     }
 }

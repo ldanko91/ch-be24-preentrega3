@@ -5,7 +5,8 @@ export default class ProductsDBManager {
         console.log('Conectado a Products de MongoDB')
     }
 
-    getProducts = async (pageq, limitq, filterByq, sortByq, sortOrderq) => {
+    getProducts = async (queryData) => {
+        const { pageq, limitq, filterByq, sortByq, sortOrderq } = queryData 
         if (filterByq != null) {
             const formattedFilter = filterByq.replace(/(\w+):/g, '"$1":').replace(/'/g, '');
             const filter = JSON.parse(`{${formattedFilter}}`);
@@ -17,8 +18,11 @@ export default class ProductsDBManager {
             let productos = await productsModel.paginate({}, { page: pageq, limit: limitq, lean: true, sort: ([[sortByq, sortOrderq]]) })
             return productos
         }
-        // let productos = await productsModel.paginate(filter, { page: pageq, limit: limitq, lean: true, sort: ([[sortByq, sortOrderq]]) })
-        // return productos
+    }
+
+    getAll = async () => {
+        let productos = await productsModel.find()
+        return productos
     }
 
     getProductByCode = async(getCode)=>{
@@ -37,7 +41,7 @@ export default class ProductsDBManager {
     }
 
     deleteProductByCode = async (delCode) =>{
-        let deleteOne = await productsModel.updateOne({code:delCode},{status:true});
+        let deleteOne = await productsModel.updateOne({ code: delCode }, { status: false });
         return deleteOne
     }
 

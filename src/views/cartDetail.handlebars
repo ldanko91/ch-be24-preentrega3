@@ -1,6 +1,8 @@
 <h1>Productos en el carrito</h1>
 <h2>ID:{{ccod}}</h2>
 
+<button onclick="goPurchase('{{ccod}}')">Confirmar compra!</button>
+
 <section id="carrito">
     <div>
 
@@ -17,7 +19,7 @@
                 <li>Stock:{{this.id.stock}}</li>
                 <li>ID:{{this.id._id}}</li>
             </ul>
-            <button onclick="delFromCart('{{_id}}')">Eliminar del carrito</button>
+            <button onclick="delFromCart('{{_id}}','{{../ccod}}')">Eliminar del carrito</button>
             {{/each}}
 
 
@@ -31,4 +33,5 @@
         {{/if}}
     </div>
 </section>
+<button onclick="emptyCart('{{ccod}}')">Vaciar carrito</button>
 <script src="/js/carts.js"></script>

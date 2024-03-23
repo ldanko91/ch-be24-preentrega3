@@ -1,4 +1,5 @@
 import UsersDBManager from "../dao/dbManagers/UsersDBManager.js";
+import CurrentDto from "../dto/userDto/CurrentDto.js";
 const DBUsersManager = new UsersDBManager();
 
 export default class dbUsersController {
@@ -23,13 +24,20 @@ export default class dbUsersController {
         return download
         }
 
+    getCurrentUserById = async (id) => {
+        let download = await DBUsersManager.getUserById(id);
+        const current = new CurrentDto(download)
+        return current
+    }
+
+
     updateUserByEmail = async(email,data)=> {
     const upload = await DBUsersManager.updateUserByEmail(email,data)  
     return upload
     }
 
-    deleteProductById = async(pid)=> {
-        const upload = await DBProductsManager.deleteProductByCode(pid)
-        return upload    
+    updateCart = async (uId, cId) => {
+        const upload = await DBUsersManager.updateCart(uId, cId)
+        return upload
     }
 }

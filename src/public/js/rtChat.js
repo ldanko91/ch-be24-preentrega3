@@ -1,5 +1,4 @@
 const socket = io();
-
 const oldMessagesDiv = document.getElementById("oldMessagesDiv")
 const sendMessge = document.getElementById("sendMessage")
 sendMessge.addEventListener('click', e => {
@@ -22,16 +21,3 @@ socket.on('message-showOldMessages', messages => {
         oldMessagesDiv.innerHTML = messagesShow;
     }
 })
-
-// const chatForm = document.getElementById("chatForm")
-// const userMail = document.getElementById("userMail")
-// const message = document.getElementById("message")
-
-// chatForm.addEventListener('submit', e => {
-//     e.preventDefault();
-//     let newMessage = {
-//         user: userMail.value,
-//         message: message.value,
-//     }
-//     socket.emit('sendMessage', newMessage)
-// })

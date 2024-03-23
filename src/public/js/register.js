@@ -8,18 +8,12 @@ registerForm.addEventListener('submit', (e) => {
 
     data.forEach((value, key) => (obj[key] = value))
 
-    const URL = '/api/sessions/register';
-    const headers = {
-        'Content-type': 'application/json',
-    };
-    const method = 'POST';
-    const body = JSON.stringify(obj);
-
-    // console.log(JSON.parse(body))
-    fetch(URL, {
-        headers:headers,
-        method: method,
-        body: body,
+    fetch('/api/sessions/register', {
+        headers: {
+            'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(obj),
     })
         .then(response => response.json())
         .then(data => console.log(data))

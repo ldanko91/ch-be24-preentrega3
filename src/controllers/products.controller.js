@@ -1,31 +1,30 @@
-import ProductsDBManager from "../dao/dbManagers/ProductsDBManager.js";
-const DBProductsManager = new ProductsDBManager();
+import FactoryProductManager from "../dao/factories/productFactory/productFactory.js";
+const ProductManager = new FactoryProductManager();
 
 export default class dbProductsController {
 
-    getAll = async(pageq, limitq, filterByq, sortByq, sortOrderq)=> {
-    let download = await DBProductsManager.getProducts(pageq, limitq, filterByq, sortByq, sortOrderq);
-    return download;
-    
+    getAll = async (queryData) => {
+        let download = await ProductManager.getProducts(queryData);
+        return download;
     }
 
     getProductByCode = async(pcod)=> {
-    let download = await DBProductsManager.getProductByCode(pcod);
+        let download = await ProductManager.getProductByCode(pcod);
     return download
     }
 
     createOne = async(newProd)=> {
-    const upload = await DBProductsManager.addProduct(newProd);  
+        const upload = await ProductManager.addProduct(newProd);  
     return upload
     }
 
-    updateProductById = async(pid,updProd)=> {
-    const upload = await DBProductsManager.updateProductByCode(pid,updProd)  
+    updateProductById = async (updCode, updProd) => {
+        const upload = await ProductManager.updateProductByCode(updCode, updProd)  
     return upload
     }
 
-    deleteProductById = async(pid)=> {
-        const upload = await DBProductsManager.deleteProductByCode(pid)
+    deleteProductByCod = async (cod) => {
+        const upload = await ProductManager.deleteProductByCode(cod)
         return upload    
     }
 }

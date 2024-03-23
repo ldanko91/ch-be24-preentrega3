@@ -1,0 +1,105 @@
+<h1>Administración de productos</h1>
+
+<a href="/api/sessions/current">
+    <h2>Ir al administrador de perfiles</h2>
+</a>
+
+<h2>Carga de productos</h2>
+
+<section id="addProducts">
+
+    <form action="uploadProductForm" id="uploadProductForm">
+        <label for="title">Nombre del producto</label>
+        <input type="text" id="title" name="title">
+
+        <label for="code">Código</label>
+        <input type="text" id="code" name="code">
+
+        <label for="description">Descripción</label>
+        <input type="text" id="description" name="description">
+
+        <label for="price">Precio (en número entero)</label>
+        <input type="number" id="price" name="price">
+
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" name="stock">
+
+        <label for="category">Categoría</label>
+        <input type="text" id="category" name="category">
+
+        <input type="submit" value="Cargar Producto" id="sendUpload">
+    </form>
+
+</section>
+
+<section id="modifyProds">
+
+    <h2>Modificación de productos cargados</h2>
+
+    <form action="modifyProductForm" id="modifyProductForm">
+        <label for="code">Código (campo clave)</label>
+        <input type="text" id="code" name="code">
+
+        <label for="title">Nombre del producto</label>
+        <input type="text" id="title" name="title">
+
+        <label for="description">Descripción</label>
+        <input type="text" id="description" name="description">
+
+        <label for="price">Precio (en número entero)</label>
+        <input type="number" id="price" name="price">
+
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" name="stock">
+
+        <label for="category">Categoría</label>
+        <input type="text" id="category" name="category">
+
+        <label for="status">Disponible? (Indicar true o false)</label>
+        <input type="text" id="status" name="status">
+
+        <input type="submit" value="Modificar Producto" id="sendUpload">
+    </form>
+
+</section>
+
+<section id="deleteProds">
+    <div id="deleteByCode">
+        <h2>Eliminar producto por código</h2>
+        <p>Cambia el status del producto a false</p>
+        <form action="deleteProductForm" id="deleteProductForm">
+            <label for="code">Código a eliminar</label>
+            <input type="text" id="code" name="code">
+            <input type="submit" value="Eliminar Producto" id="sendDelete">
+    </div>
+</section>
+
+<section id="showProducts">
+    <div id="showAllProds">
+        <h2>Listado actual de productos</h2>
+        {{#each productos}}
+        <div>
+            <a href="/api/products/{{code}}">
+                <h3>{{title}}</h3>
+            </a>
+            <h4>${{price}}</h4>
+            <ul>
+                <li>Código: {{code}}</li>
+                <li>ID:{{_id}}</li>
+                <li>Categoría:{{category}}</li>
+                <li>Status: {{status}}</li>
+            </ul>
+            <button onclick="addToCart('{{_id}}')">Agregar al carrito!</button>
+        </div>
+        {{/each}}
+        {{#if hasPrevPage}}
+        <a href="?page={{prevPage}}"><button>Anterior</button></a>
+        {{/if}}
+        <p>Página {{page}} de {{totalPages}}</p>
+        {{#if hasNextPage}}
+        <a href="?page={{nextPage}}"><button>Siguiente</button></a>
+        {{/if}}
+    </div>
+</section>
+
+<script src="/js/productsBackoffice.js"></script>

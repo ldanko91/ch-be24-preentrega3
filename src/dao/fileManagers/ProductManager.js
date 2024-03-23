@@ -62,11 +62,11 @@ class ProductManager {
         return(Productos)
     }
 
-    getProductById = (prodId) => {
+    getProductByCode = (getCode) => {
         let contenido = fs.readFileSync(this.path,'utf-8')
         let Productos = JSON.parse(contenido)
         
-        if(!Productos.some(producto => producto.id === prodId )){
+        if (!Productos.some(producto => producto.code === getCode)) {
             console.log("El producto buscado no existe!")
         }else{
 
@@ -75,11 +75,11 @@ class ProductManager {
         }
     }  
 
-    updateProductById = (prodId,data) => {
+    updateProductByCode = (updCode, data) => {
         let contenido = fs.readFileSync(this.path,'utf-8')
         let Productos = JSON.parse(contenido)
         
-        if(!Productos.some(producto => producto.id === prodId )){
+        if (!Productos.some(producto => producto.code === updCode)) {
             console.log("El producto buscado no existe!")
         }else{
 
@@ -97,11 +97,11 @@ class ProductManager {
         }
     }
 
-    deleteProductById = (prodId) => {
+    deleteProductByCode = (delCode) => {
         let contenido = fs.readFileSync(this.path,'utf-8')
         let Productos = JSON.parse(contenido)
         
-        if(!Productos.some(producto => producto.id === prodId )){
+        if (!Productos.some(producto => producto.code === delCode)) {
             console.log("El producto buscado no existe!")
         }else{
 

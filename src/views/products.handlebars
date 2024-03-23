@@ -1,3 +1,4 @@
+<h3>Carrito activo: {{cartCode}}</h3>
 <h1>Lista de productos</h1>
 <section id="selectProdCats">
     <div>
@@ -39,7 +40,7 @@
                 <li>ID:{{_id}}</li>
                 <li>Categoría:{{category}}</li>
             </ul>
-            <button onclick="addToCart('{{_id}}')">Agregar al carrito!</button>
+            <button onclick="addToCart('{{_id}}','{{../cartCode}}')">Agregar al carrito!</button>
         </div>
         {{/each}}
         {{#if hasPrevPage}}

@@ -52,7 +52,7 @@ class CartManager {
         }
     }
 
-    updateCartProductById = (data) => {
+    updateProducts = (data) => {
         let contenido = fs.readFileSync(this.path,'utf-8')
         let Carritos = JSON.parse(contenido)
         
@@ -89,7 +89,7 @@ class CartManager {
         }
     }
     
-    deleteCartById = (cartId) => {
+    emptyCart = (cartId) => {
         let contenido = fs.readFileSync(this.path,'utf-8')
         let Carritos = JSON.parse(contenido)
         

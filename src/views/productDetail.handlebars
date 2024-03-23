@@ -1,3 +1,4 @@
+<h3>Carrito activo: {{cartCode}}</h3>
 <h1>Detalle del producto</h1>
 
 <section id="productos">
@@ -16,7 +17,7 @@
                 <li>Código:{{code}}</li>
                 <li>Stock:{{stock}}</li>
             </ul>
-            <button onclick="addToCart('{{_id}}')">Agregar al carrito!</button>
+            <button onclick="addToCart('{{_id}}','{{../cartCode}}')">Agregar al carrito!</button>
         </div>
         {{/each}}
 

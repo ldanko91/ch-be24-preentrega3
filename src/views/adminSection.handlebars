@@ -1,7 +1,22 @@
-<h1>Bienvenido Coder Admin!</h1>
-<h2>Listado de usuarios</h2>
+<h1>Bienvenido Admin!</h1>
+<section id="perfil">
+    <div>
+        <ul>
+            <li>Nombre completo: {{profile.first_name}} {{profile.last_name}}</li>
+            <li>ID: {{profile._id}}</li>
+            <li>{{profile.email}}</li>
+            <li>Edad: {{profile.age}}</li>
+            <li>Rol: {{profile.role}}</li>
+        </ul>
+    </div>
+
+    <a href="/api/products/backoffice">
+        <h2>Ir al administrador de productos</h2>
+    </a>
+</section>
 
 <section id="usuarios">
+<h2>Listado de usuarios</h2>
     <div>
 
         {{#each users}}

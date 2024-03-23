@@ -1,12 +1,14 @@
-import dbProdsRouter from "./dbProds.routes.js"
-import dbCartsRouter from "./dbCarts.routes.js"
-import loginRouter from "./login.routes.js"
+import prodsRouter from "./prodsRouter.routes.js"
+import cartsRouter from "./cartsRouter.routes.js"
+import loginRouter from "./loginRouter.routes.js"
+import chatRouter from "./dbChat.routes.js"
 
 const indexRouter = app => {
     
-    app.use('/api/products', dbProdsRouter)
-    app.use('/api/carts', dbCartsRouter)
-    app.use('/api/sessions', loginRouter)
+  app.use('/api/products', prodsRouter)
+  app.use('/api/carts', cartsRouter)
+  app.use('/api/sessions', loginRouter)
+  app.use('/api/chat', chatRouter)
   }
 
 export default indexRouter
